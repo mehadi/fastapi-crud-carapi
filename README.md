@@ -13,9 +13,11 @@ app/
 ├── routers/
 │   ├── __init__.py
 │   └── car.py
-└── schemas/
-    ├── __init__.py
-    └── car.py
+├── schemas/
+│   ├── __init__.py
+│   └── car.py
+└── services/
+    └── car_service.py
 ```
 
 ## Features
@@ -23,7 +25,8 @@ app/
 - Create, Read, Update, and Delete (CRUD) operations for cars
 - RESTful API endpoints
 - Pydantic models for data validation
-- Modular project structure
+- Modular project structure with service layer pattern
+- Clean separation of business logic from API routes
 
 ## API Endpoints
 
@@ -58,18 +61,6 @@ The project uses the following main packages:
 - `uvicorn==0.34.2` - ASGI server implementation for running FastAPI applications
 - `pydantic==2.11.3` - Data validation and settings management using Python type annotations
 - `starlette==0.46.2` - Lightweight ASGI framework/toolkit (dependency of FastAPI)
-
-Additional dependencies include:
-- `annotated-types` - Runtime support for type annotations
-- `anyio` - High level asynchronous I/O
-- `click` - Command line interface creation kit
-- `colorama` - Cross-platform colored terminal text
-- `h11` - Pure-Python HTTP/1.1 client library
-- `idna` - Internationalized Domain Names in Applications
-- `pydantic_core` - Core validation logic for Pydantic
-- `sniffio` - Sniff out which async library your code is running under
-- `typing-inspection` - Runtime inspection utilities for typing
-- `typing_extensions` - Backported and experimental type hints
 
 ## Installation
 
@@ -145,8 +136,14 @@ curl -X DELETE "http://localhost:8000/cars/1"
 This project uses a modular structure:
 - `app/schemas/` - Contains Pydantic models for data validation
 - `app/routers/` - Contains route handlers for different API endpoints
+- `app/services/` - Contains business logic separated from the API layer
 - `app/models/` - Reserved for database models (when implemented)
 - `app/main.py` - Main application file that ties everything together
+
+The project follows the service layer pattern where:
+- Routes handle HTTP requests and responses
+- Services contain all business logic
+- Models/Schemas handle data validation and structure
 
 ## License
 
